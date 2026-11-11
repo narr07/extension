@@ -1,4 +1,4 @@
-# Input Aset KIB-E
+# bmdinput
 
 Extension untuk Microsoft Edge dan Google Chrome yang mengisi data **KIB-E (Aset Tetap Lainnya)** di <https://asetdisdik.id/kib-e> secara massal. Sumber datanya bisa invoice PDF SIPLah, file Excel/CSV, atau tempelan dari Excel.
 
@@ -61,4 +61,4 @@ Hanya **Judul Buku**, **Jumlah**, dan **Harga Satuan** yang wajib diisi. Kolom l
 | `content/kibe-page.js` | Disuntikkan ke halaman KIB-E; memanggil `newKIB()`, `selectTextKode()`, `saveKIB()` |
 | `lib/` | SheetJS 0.18.5 (Excel) dan pdf.js 4.10.38 (PDF), disertakan lokal |
 | `store/` | Bahan listing Edge Add-ons / Chrome Web Store dan logo 300×300 |
-| `pack.ps1` | Membuat ZIP untuk diunggah ke store (`dist/input-kib-e-<versi>.zip`) |
+| `pack.ps1` | Membuat ZIP untuk diunggah ke store (`dist/bmdinput-<versi>.zip`) |

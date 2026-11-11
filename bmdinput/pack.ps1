@@ -1,5 +1,5 @@
 # Membuat ZIP untuk diunggah ke Microsoft Edge Add-ons (dan Chrome Web Store).
-# Pemakaian: pwsh ./pack.ps1   -> dist/input-kib-e-<versi>.zip
+# Pemakaian: pwsh ./pack.ps1   -> dist/bmdinput-<versi>.zip
 $ErrorActionPreference = 'Stop'
 $root = $PSScriptRoot
 $manifest = Get-Content (Join-Path $root 'manifest.json') -Raw | ConvertFrom-Json
@@ -14,7 +14,7 @@ if (Test-Path $stage) { Remove-Item $stage -Recurse -Force }
 New-Item -ItemType Directory -Force $stage | Out-Null
 foreach ($item in $include) { Copy-Item (Join-Path $root $item) -Destination $stage -Recurse }
 
-$zip = Join-Path $dist "input-kib-e-$version.zip"
+$zip = Join-Path $dist "bmdinput-$version.zip"
 if (Test-Path $zip) { Remove-Item $zip -Force }
 Compress-Archive -Path (Join-Path $stage '*') -DestinationPath $zip
 Remove-Item $stage -Recurse -Force

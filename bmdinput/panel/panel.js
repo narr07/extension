@@ -1091,7 +1091,7 @@
         'Waktu': st.at ? new Date(st.at).toLocaleString('id-ID') : ''
       };
     });
-    download('hasil-input-kib-e.csv', D.toCSV(headers, rows), 'text/csv');
+    download('hasil-bmdinput.csv', D.toCSV(headers, rows), 'text/csv');
   });
 
   $('btnClearLog').addEventListener('click', () => { state.log = []; renderLog(); persist(); });

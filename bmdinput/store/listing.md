@@ -1,7 +1,7 @@
 # Bahan listing Microsoft Edge Add-ons
 
 ## Nama
-Input Aset KIB-E
+bmdinput
 
 ## Kategori
 Productivity
@@ -10,7 +10,7 @@ Productivity
 Input data aset KIB-E di asetdisdik.id secara massal dari invoice PDF SIPLah atau file Excel.
 
 ## Deskripsi (bahasa Indonesia)
-Input Aset KIB-E membantu operator sekolah mengisi Kartu Inventaris Barang E (Aset Tetap Lainnya, misalnya buku) di asetdisdik.id tanpa mengetik satu per satu.
+bmdinput membantu operator sekolah mengisi Kartu Inventaris Barang E (Aset Tetap Lainnya, misalnya buku) di asetdisdik.id tanpa mengetik satu per satu.
 
 Fitur:
 - Impor invoice/proforma PDF SIPLah secara langsung. Judul, kelas, harga, dan jumlah terbaca otomatis.

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Input Aset KIB-E",
-  "short_name": "Input KIB-E",
+  "name": "bmdinput",
+  "short_name": "bmdinput",
   "version": "1.0.0",
   "description": "Input data aset KIB-E (Aset Tetap Lainnya) di asetdisdik.id secara massal dari invoice PDF SIPLah, Excel, atau CSV.",
   "minimum_chrome_version": "116",
@@ -11,7 +11,7 @@
     "service_worker": "background.js"
   },
   "action": {
-    "default_title": "Buka panel Input KIB-E",
+    "default_title": "Buka panel bmdinput",
     "default_icon": {
       "16": "icons/icon16.png",
       "32": "icons/icon32.png",

@@ -229,7 +229,7 @@
     const kode = (opts.kode || []).filter((k) => k.uraian);
 
     const wb = XLSX.utils.book_new();
-    wb.Props = { Title: 'Template Input KIB-E', Subject: 'Data aset KIB-E untuk extension Input KIB-E' };
+    wb.Props = { Title: 'Template KIB-E bmdinput', Subject: 'Data aset KIB-E untuk extension bmdinput' };
 
     // --- Data (lembar pertama: yang dibaca saat impor). opts.rows = [{Judul Buku: ..}] opsional.
     const extra = opts.extra || [];
@@ -258,7 +258,7 @@
 
     // --- Petunjuk
     const pet = [
-      ['Template Input KIB-E' + (opts.sekolah ? ' · ' + opts.sekolah : '')],
+      ['Template KIB-E bmdinput' + (opts.sekolah ? ' · ' + opts.sekolah : '')],
       ['1. Isi lembar "Data" mulai baris 2, satu baris untuk satu jenis barang. Jangan ubah judul kolom di baris 1.'],
       ['2. Kolom yang kosong memakai nilai default yang diatur di tab Pemetaan pada panel extension.'],
       ['3. Simpan file, lalu di panel extension buka tab Data, klik "Impor PDF / Excel / CSV", dan pilih file ini.'],
