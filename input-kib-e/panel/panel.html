@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Input KIB-E</title>
+  <link rel="stylesheet" href="panel.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <img src="../icons/icon32.png" alt="" width="22" height="22">
+      <strong>Input KIB-E</strong>
+    </div>
+    <button class="conn" id="conn" type="button" title="Klik untuk cek ulang koneksi ke halaman KIB-E">
+      <span class="dot"></span><span id="connText">Mencari tab…</span>
+    </button>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" data-tab="data" class="active">1. Data</button>
+    <button role="tab" data-tab="map">2. Pemetaan</button>
+    <button role="tab" data-tab="run">3. Jalankan</button>
+  </nav>
+
+  <!-- ======================= DATA ======================= -->
+  <section id="tab-data" class="pane active">
+    <div class="card">
+      <h2>Sumber data</h2>
+      <p class="muted">Invoice PDF SIPLah dibaca otomatis. Untuk Excel/CSV, baris pertama dipakai sebagai nama kolom.</p>
+      <div class="row gap wrap">
+        <label class="btn primary">
+          Impor PDF / Excel / CSV
+          <input type="file" id="fileInput" accept=".pdf,.xlsx,.xls,.csv,.tsv,.txt" hidden>
+        </label>
+        <button class="btn" id="btnPaste" type="button">Tempel dari Excel</button>
+        <button class="btn ghost" id="btnTemplate" type="button">Unduh template Excel</button>
+      </div>
+      <div id="sheetPick" class="field hidden">
+        <label for="sheetSelect">Sheet</label>
+        <select id="sheetSelect"></select>
+      </div>
+      <div id="pasteBox" class="hidden">
+        <textarea id="pasteArea" rows="6" placeholder="Blok sel di Excel termasuk baris judul kolom, salin (Ctrl+C), lalu tempel di sini (Ctrl+V)."></textarea>
+        <div class="row gap">
+          <button class="btn primary" id="btnPasteApply" type="button">Pakai data ini</button>
+          <button class="btn ghost" id="btnPasteCancel" type="button">Batal</button>
+        </div>
+      </div>
+      <div id="dataMeta" class="meta hidden"></div>
+    </div>
+
+    <div class="card">
+      <div class="row between">
+        <h2>Pratinjau</h2>
+        <span class="pill" id="dataInfo">Belum ada data</span>
+      </div>
+      <p class="muted small">Klik sel untuk memperbaiki isinya. Perubahan langsung tersimpan.</p>
+      <div class="tablewrap" id="dataTable"></div>
+      <div class="row gap wrap mt">
+        <button class="btn ghost sm" id="btnDownloadData" type="button" title="Data dari PDF SIPLah diubah ke format template Excel">Unduh data (Excel)</button>
+        <button class="btn ghost sm danger" id="btnClearData" type="button">Hapus data</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= PEMETAAN ======================= -->
+  <section id="tab-map" class="pane">
+    <div class="card">
+      <div class="row between">
+        <h2>Kode Barang</h2>
+        <span class="pill warn" id="kodePill">Belum dipilih</span>
+      </div>
+      <div class="field">
+        <label for="kodeMode">Sumber</label>
+        <select id="kodeMode">
+          <option value="fixed">Sama untuk semua baris</option>
+          <option value="column">Dari kolom data (uraian atau kode lengkap)</option>
+        </select>
+      </div>
+      <div id="kodeColumnBox" class="field hidden">
+        <label for="kodeColumn">Kolom</label>
+        <select id="kodeColumn"></select>
+      </div>
+      <div id="kodeFixedBox">
+        <p class="small muted" id="kodeFixedLabel">Kode untuk semua baris</p>
+        <div class="row gap">
+          <input id="kodeSearch" type="search" placeholder="Cari, mis. buku pendidikan">
+          <button class="btn" id="btnKodeSearch" type="button">Cari</button>
+        </div>
+        <ul class="kodelist" id="kodeResults"></ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Isian form</h2>
+      <p class="muted small">Atur sumber setiap field di form "Tambah Barang". Pilihan <b>Kolom</b> mengambil nilai dari data, dan nilai di sebelahnya dipakai kalau sel kosong.</p>
+      <div id="mapFields" class="mapfields"></div>
+      <label class="check mt"><input type="checkbox" id="splitCopies"> Pecah jumlah jadi entri terpisah (jumlah 2 → 2 entri masing-masing 1)</label>
+      <button class="btn ghost sm mt" id="btnRefreshOptions" type="button">Muat ulang pilihan dari halaman</button>
+    </div>
+  </section>
+
+  <!-- ======================= JALANKAN ======================= -->
+  <section id="tab-run" class="pane">
+    <div class="card">
+      <h2>Pengaturan</h2>
+      <div class="grid2">
+        <div class="field"><label for="rowFrom">Dari entri</label><input id="rowFrom" type="number" min="1" value="1"></div>
+        <div class="field"><label for="rowTo">Sampai entri</label><input id="rowTo" type="number" min="1" placeholder="terakhir"></div>
+        <div class="field"><label for="rowDelay">Jeda antar entri (ms)</label><input id="rowDelay" type="number" min="0" step="100" value="800"></div>
+        <div class="field"><label for="timeout">Batas tunggu simpan (ms)</label><input id="timeout" type="number" min="3000" step="1000" value="20000"></div>
+      </div>
+      <div class="field">
+        <label for="onError">Jika entri gagal</label>
+        <select id="onError">
+          <option value="stop">Berhenti (disarankan)</option>
+          <option value="continue">Lanjut ke entri berikutnya</option>
+        </select>
+      </div>
+      <label class="check"><input type="checkbox" id="skipDone" checked> Lewati entri yang sudah berhasil disimpan</label>
+      <label class="check"><input type="checkbox" id="skipExisting" checked> Lewati entri yang sudah ada di KIB-E situs (judul, ruangan, jumlah, harga, kode, triwulan, dan tahun sama)</label>
+      <label class="check"><input type="checkbox" id="continueRegister" checked> Nomor register melanjutkan nomor terakhir di situs untuk judul dan ruangan yang sama (mis. 0001-0002 → 0003-0004)</label>
+    </div>
+
+    <div class="card">
+      <div class="row between">
+        <h2>Entri</h2>
+        <span class="pill" id="entryInfo">0 entri</span>
+      </div>
+      <div class="row gap wrap">
+        <button class="btn" id="btnFillOnly" type="button" title="Isi form Tambah Barang dengan entri pertama dalam rentang, tanpa menyimpan">Isi form saja</button>
+        <button class="btn" id="btnTest" type="button">Simpan 1 entri</button>
+        <button class="btn primary" id="btnStart" type="button">Mulai</button>
+        <button class="btn" id="btnPause" type="button" disabled>Jeda</button>
+        <button class="btn danger" id="btnStop" type="button" disabled>Stop</button>
+      </div>
+      <div class="progress"><div id="progBar"></div></div>
+      <div class="row between">
+        <span id="progText" class="muted">Siap.</span>
+        <div class="row gap-s">
+          <button class="btn ghost sm" id="btnCheckSite" type="button" title="Tandai entri yang datanya sudah ada di KIB-E situs">Cek di situs</button>
+          <button class="btn ghost sm" id="btnExportResult" type="button">Unduh hasil</button>
+          <button class="btn ghost sm" id="btnResetStatus" type="button">Reset status</button>
+        </div>
+      </div>
+      <div class="tablewrap mt" id="entryTable"></div>
+    </div>
+
+    <div class="card">
+      <div class="row between">
+        <h2>Log</h2>
+        <button class="btn ghost sm" id="btnClearLog" type="button">Bersihkan</button>
+      </div>
+      <ul class="log" id="log"></ul>
+    </div>
+  </section>
+
+  <script src="../lib/xlsx.full.min.js"></script>
+  <script src="data.js"></script>
+  <script src="panel.js"></script>
+</body>
+</html>

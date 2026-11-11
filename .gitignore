@@ -1,0 +1,27 @@
+# Hasil kemas untuk store
+dist/
+*.zip
+
+# Data lokal / sekolah
+template/
+*.xlsx
+*.csv
+
+# Dependensi & cache alat
+node_modules/
+graft/
+
+# Berkas alat AI dan editor
+.claude/
+.gemini/
+.codex/
+.roo/
+.agents/
+AGENTS.md
+GEMINI.md
+CLAUDE.md
+.mcp.json
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
